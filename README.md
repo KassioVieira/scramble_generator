@@ -4,6 +4,14 @@ The Scramble App is a web application that generates random scrambles for Rubik'
 
 ![App Screenshot](docs/img.png)
 
+<blockquote style="
+  border-left: 4px solid #f44336;
+  padding: 10px;
+  margin: 10px 0;
+">
+  <p><strong>Note:</strong> This project was created as a demonstration of using Chat GPT as a tool for developers. It showcases how a language model like Chat GPT, powered by OpenAI, can assist in generating scrambles and providing a timer for Rubik's Cube solving.</p>
+</blockquote>
+
 ## Features
 
 - Generates random Rubik's Cube scrambles.
