@@ -9,4 +9,4 @@ const Timer = ({ value }: TimerType) => {
   );
 };
 
-export default Timer;
+export default React.memo(Timer);

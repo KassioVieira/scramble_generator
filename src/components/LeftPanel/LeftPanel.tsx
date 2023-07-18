@@ -1,38 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TimerType } from '../../types/TimerTypes';
 
-const LeftPanel = () => {
-  const [timers, setTimers] = useState<Array<TimerType>>([
-    {
-      value: '00:30:01'
-    },
-    {
-      value: '00:31:02'
-    },
-    {
-      value: '00:33:02'
-    },
-    {
-      value: '00:34:21'
-    }
-  ]);
+type LeftPanelProps = {
+  values: Array<string>;
+};
 
+const LeftPanel = ({ values }: LeftPanelProps) => {
   return (
     <div className='left-sidebar'>
       <div className='pageTitle'>Rubik's Cube Timer</div>
       <div className='row'>
-        <h2 className='list'>Id</h2>
-        <h2 className='list'>Tempo</h2>
+        <h2 className='column'>Tempos</h2>
       </div>
       <ul className='timers'>
-        {timers.map((timer, index) => (
-          <li key={`timer-${index}`} className='list'>
-            {index + 1}: {timer.value}
+        {values.map((timer, index) => (
+          <li key={`timer-${index}`} className='row'>
+            <span className='column'>{index + 1}</span>
+            <span className='columntimer'>{timer}</span>
           </li>
         ))}
       </ul>
+      {values.length === 0 && (
+        <div className='notTimers'>seus tempos aparecerão aqui</div>
+      )}
     </div>
   );
 };
 
-export default LeftPanel;
+export default React.memo(LeftPanel);

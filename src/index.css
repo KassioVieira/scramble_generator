@@ -20,24 +20,13 @@ code {
   align-items: flex-start;
 }
 
-.left-sidebar {
-  width: 15%;
-  height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid #c0c0c0;
-  border-top-width: 0px;
-  border-left-width: 0px;
-  border-bottom-width: 0px;
-}
-
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 85%;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .scrambleBox {
@@ -54,6 +43,7 @@ code {
 
 .centered-section {
   text-align: center;
+  flex: 2;
 }
 
 .time {
@@ -61,7 +51,33 @@ code {
   color: white;
 }
 
+ul {
+  list-style: none;
+}
+
+li {
+  margin-top: 4px;
+}
+
+.list {
+  font-size: 22px;
+  color: white;
+}
+
+.left-sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+  /* height: 100vh; */
+  align-items: center;
+  border: 1px solid #c0c0c0;
+  border-top-width: 0px;
+  border-left-width: 0px;
+  border-bottom-width: 0px;
+}
+
 .pageTitle {
+  text-align: center;
   width: 100%;
   height: 40px;
   text-align: center;
@@ -73,20 +89,78 @@ code {
   border-left-width: 0px;
 }
 
-ul {
-  list-style: none;
-}
-
-li {
-  margin-top: 4px;
-}
-
 .row {
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  color: white;
 }
 
-.list {
-  font-size: 22px;
+.column {
+  flex: 1;
+}
+
+.timers {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.columntimer {
+  width: 85%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  border: 1px solid #c0c0c0;
+  padding: 8px;
+}
+
+.notTimers {
   color: white;
+}
+
+.timers li .column {
+  display: flex;
+  align-items: center;
+  border: 1px solid #c0c0c0;
+  padding: 8px;
+}
+
+.rubiks-cube {
+}
+
+.cube-face {
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 4px;
+}
+
+.cube-row {
+  display: flex;
+}
+
+.cube-cell {
+  width: 40px;
+  height: 40px;
+  margin: 2px;
+}
+
+.lateral {
+  display: flex;
+}
+
+.up {
+  margin-left: 132px;
+}
+
+.dow {
+  margin-left: 132px;
+}
+
+.cube-section {
+  width: 30%;
+  height: 400px;
+  align-self: end;
+  margin-right: 100px;
+  bottom: 10px;
+  top: 0px;
+  margin-bottom: 25px;
 }
