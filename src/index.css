@@ -138,8 +138,8 @@ li {
 }
 
 .cube-cell {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   margin: 2px;
 }
 
@@ -148,11 +148,11 @@ li {
 }
 
 .up {
-  margin-left: 132px;
+  margin-left: 100px;
 }
 
 .dow {
-  margin-left: 132px;
+  margin-left: 102px;
 }
 
 .cube-section {
