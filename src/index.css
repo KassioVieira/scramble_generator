@@ -131,6 +131,7 @@ li {
 .cube-face {
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 4px;
+  margin: 2px;
 }
 
 .cube-row {
@@ -138,8 +139,8 @@ li {
 }
 
 .cube-cell {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   margin: 2px;
 }
 
@@ -148,11 +149,11 @@ li {
 }
 
 .up {
-  margin-left: 100px;
+  margin-left: 90px;
 }
 
 .dow {
-  margin-left: 102px;
+  margin-left: 90px;
 }
 
 .cube-section {

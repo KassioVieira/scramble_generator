@@ -1,726 +1,3 @@
-// import { useEffect, useState } from 'react';
-// import { ColorType } from '../types/ColorType';
-// import { FaceType } from '../types/FaceType';
-// import { MOVES } from '../utils/Constants';
-
-// const useCubeLogicHooks = () => {
-//   const initialCubeState: { [face in FaceType]: ColorType[][] } = {
-//     F: [
-//       ['green', 'green', 'green'],
-//       ['green', 'green', 'green'],
-//       ['green', 'green', 'green']
-//     ],
-//     B: [
-//       ['blue', 'blue', 'blue'],
-//       ['blue', 'blue', 'blue'],
-//       ['blue', 'blue', 'blue']
-//     ],
-//     L: [
-//       ['orange', 'orange', 'orange'],
-//       ['orange', 'orange', 'orange'],
-//       ['orange', 'orange', 'orange']
-//     ],
-//     R: [
-//       ['red', 'red', 'red'],
-//       ['red', 'red', 'red'],
-//       ['red', 'red', 'red']
-//     ],
-//     U: [
-//       ['white', 'white', 'white'],
-//       ['white', 'white', 'white'],
-//       ['white', 'white', 'white']
-//     ],
-//     D: [
-//       ['yellow', 'yellow', 'yellow'],
-//       ['yellow', 'yellow', 'yellow'],
-//       ['yellow', 'yellow', 'yellow']
-//     ]
-//   };
-
-//   const [state, setState] =
-//     useState<{ [face in FaceType]: ColorType[][] }>(initialCubeState);
-
-//   const [stateUpdated, setStateUpdate] =
-//     useState<{ [face in FaceType]: ColorType[][] }>(initialCubeState);
-
-//   const [currentMoveIndex, setCurrentMoveIndex] = useState({
-//     index: 0,
-//     scramble: ''
-//   });
-
-//   const [scrambleState, setScrambleState] = useState('');
-
-//   useEffect(() => {
-//     const executeNextMove = () => {
-//       if (currentMoveIndex.scramble) {
-//         const moves = currentMoveIndex.scramble.trim().split(' ');
-
-//         if (currentMoveIndex.index < moves.length) {
-//           const move = moves[currentMoveIndex.index];
-
-//           switch (move) {
-//             case 'F':
-//               const result = rotateFrontClockwise(state);
-//               setState(result);
-//               break;
-//             case "F'":
-//               setState(rotateFrontCounterClockwise(state));
-//               break;
-//             case 'F2':
-//               const intermed = rotateFront180(state);
-//               setState(intermed);
-//               break;
-//             case 'B':
-//               const b = rotateBackClockwise(state);
-//               setState(b);
-//               break;
-//             case "B'":
-//               const bL = rotateBackCounterClockwise(state);
-//               setState(bL);
-//               break;
-//             case 'B2':
-//               // const result = rotateBackClockwise(state);
-//               // rotateBackClockwise();
-//               break;
-//             case 'L':
-//               rotateLeftClockwise();
-//               break;
-//             case "L'":
-//               rotateLeftCounterClockwise();
-//               break;
-//             case 'L2':
-//               rotateLeftClockwise();
-//               rotateLeftClockwise();
-//               break;
-//             case 'R':
-//               rotateRightClockwise();
-//               break;
-//             case "R'":
-//               rotateRightCounterClockwise();
-//               break;
-//             case 'R2':
-//               rotateRightClockwise();
-//               rotateRightClockwise();
-//               break;
-//             case 'U':
-//               rotateUpClockwise();
-//               break;
-//             case "U'":
-//               rotateUpCounterClockwise();
-//               break;
-//             case 'U2':
-//               rotateUpClockwise();
-//               rotateUpClockwise();
-//               break;
-//             case 'D':
-//               rotateDownClockwise();
-//               break;
-//             case "D'":
-//               rotateDownCounterClockwise();
-//               break;
-//             case 'D2':
-//               rotateDownClockwise();
-//               rotateDownClockwise();
-//               break;
-//             default:
-//               throw new Error(`Invalid move: ${move}`);
-//           }
-
-//           setCurrentMoveIndex({
-//             ...currentMoveIndex,
-//             index: currentMoveIndex.index + 1
-//           });
-
-//           // if (currentMoveIndex.index + 1 > moves.length) {
-//           //   console.log('Update the CUBE');
-//           //   setState(stateUpdated);
-//           // }
-//         }
-//       }
-//     };
-
-//     executeNextMove();
-//   }, [currentMoveIndex]);
-
-//   const move = (scramble: string): void => {
-//     const moves = scramble.trim().split(' ');
-
-//     let updateState: { [face in FaceType]: ColorType[][] } = state;
-
-//     moves.forEach(move => {
-//       switch (move) {
-//         case 'F':
-//           updateState = rotateFrontClockwise(updateState);
-//           console.log('F result ', updateState);
-//           break;
-//         case "F'":
-//           updateState = rotateFrontCounterClockwise(updateState);
-//           break;
-//         case 'F2':
-//           updateState = rotateFront180(updateState);
-//           break;
-//         case 'B':
-//           updateState = rotateBackClockwise(updateState);
-//           break;
-//         case "B'":
-//           updateState = rotateBackCounterClockwise(updateState);
-//           break;
-//         // case 'B2':
-//         //   updateState = rotateBack180(updateState);
-//         //   break;
-//         // case 'L':
-//         //   updateState = rotateLeftClockwise(updateState);
-//         //   break;
-//         // case "L'":
-//         //   updateState = rotateLeftCounterClockwise(updateState);
-//         //   break;
-//         // case 'L2':
-//         //   updateState = rotateLeft180(updateState);
-//         //   break;
-//         // case 'R':
-//         //   updateState = rotateRightClockwise(updateState);
-//         //   break;
-//         // case "R'":
-//         //   updateState = rotateRightCounterClockwise(updateState);
-//         //   break;
-//         // case 'R2':
-//         //   updateState = rotateRight180(updateState);
-//         //   break;
-//         // case 'U':
-//         //   updateState = rotateUpClockwise(updateState);
-//         //   break;
-//         // case "U'":
-//         //   updateState = rotateUpCounterClockwise(updateState);
-//         //   break;
-//         // case 'U2':
-//         //   updateState = rotateUp180(updateState);
-//         //   break;
-//         // case 'D':
-//         //   updateState = rotateDownClockwise(updateState);
-//         //   break;
-//         // case "D'":
-//         //   updateState = rotateDownCounterClockwise(updateState);
-//         //   break;
-//         // case 'D2':
-//         //   updateState = rotateDown180(updateState);
-//         //   break;
-//         default:
-//           throw new Error(`Invalid move: ${move}`);
-//       }
-//     });
-
-//     setState(updateState);
-//   };
-
-//   const rotateFrontClockwise = (currentState: {
-//     [face in FaceType]: ColorType[][];
-//   }): { [face in FaceType]: ColorType[][] } => {
-//     const { F, L, U, R, D } = currentState;
-
-//     // Rotate front face
-//     const updatedF = rotateClockwise(F);
-
-//     const updatedL = L.map((row, index) => {
-//       if (index === 0) {
-//         return [row[0], row[1], D[0][0]];
-//       } else if (index === 1) {
-//         return [row[0], row[1], D[0][1]];
-//       } else {
-//         return [row[0], row[1], D[0][2]];
-//       }
-//     });
-
-//     const updatedU = U.map((row, index) => {
-//       if (index === 2) {
-//         return [L[2][2], L[2][1], L[2][0]];
-//       } else {
-//         return row;
-//       }
-//     });
-
-//     const updatedR = R.map((row, index) => [U[2][index], ...row.slice(1)]);
-
-//     const updatedD = D.map((row, index) => {
-//       if (index === 0) {
-//         return [R[2][0], R[1][0], R[0][0]];
-//       } else {
-//         return row;
-//       }
-//     });
-
-//     return {
-//       ...currentState,
-//       F: updatedF,
-//       L: updatedL,
-//       U: updatedU,
-//       R: updatedR,
-//       D: updatedD
-//     };
-//   };
-
-//   const rotateFrontCounterClockwise = (currentState: {
-//     [face in FaceType]: ColorType[][];
-//   }): { [face in FaceType]: ColorType[][] } => {
-//     const { F, L, U, R, D } = currentState;
-
-//     // Rotate front face counter-clockwise (equivalent to one clockwise rotation)
-//     const updatedF = rotateClockwise(F);
-
-//     const updatedL = L.map((row, index) => {
-//       if (index === 0) {
-//         return [row[0], row[1], U[2][2]];
-//       } else if (index === 1) {
-//         return [row[0], row[1], U[2][1]];
-//       } else {
-//         return [row[0], row[1], U[2][0]];
-//       }
-//     });
-
-//     const updatedU = U.map((row, index) => {
-//       if (index === 2) {
-//         return [R[0][0], R[1][0], R[2][0]];
-//       } else {
-//         return row;
-//       }
-//     });
-
-//     const updatedR = R.map((row, index) => {
-//       if (index === 0) {
-//         return [D[0][2], ...row.slice(1)];
-//       } else if (index === 1) {
-//         return [D[0][1], ...row.slice(1)];
-//       } else {
-//         return [D[0][0], ...row.slice(1)];
-//       }
-//     }) as ColorType[][];
-
-//     const updatedD = D.map((row, index) => {
-//       if (index === 0) {
-//         return [L[2][2], L[1][2], L[0][2]];
-//       } else {
-//         return row;
-//       }
-//     }) as ColorType[][];
-
-//     return {
-//       ...currentState,
-//       F: updatedF,
-//       L: updatedL,
-//       U: updatedU,
-//       R: updatedR,
-//       D: updatedD
-//     };
-//   };
-
-//   const rotateFront180 = (currentState: {
-//     [face in FaceType]: ColorType[][];
-//   }): {
-//     [face in FaceType]: ColorType[][];
-//   } => {
-//     const { F, L, U, R, D } = currentState;
-
-//     // Rotate front face
-//     const updatedF = rotateClockwise(F);
-
-//     const updatedL = L.map((row, index) => {
-//       if (index === 0) {
-//         return [row[0], row[1], R[2][0]];
-//       } else if (index === 1) {
-//         return [row[0], row[1], R[1][0]];
-//       } else {
-//         return [row[0], row[1], R[0][0]];
-//       }
-//     });
-
-//     const updatedU = U.map((row, index) => {
-//       if (index === 2) {
-//         return [D[0][2], D[0][1], D[0][0]];
-//       } else {
-//         return row;
-//       }
-//     });
-
-//     const updatedR = R.map((row, index) => [L[2][index], ...row.slice(1)]);
-
-//     const updatedD = D.map((row, index) => {
-//       if (index === 0) {
-//         return [U[2][2], U[2][1], U[2][0]];
-//       } else {
-//         return row;
-//       }
-//     });
-
-//     return {
-//       ...currentState,
-//       F: updatedF,
-//       L: updatedL,
-//       U: updatedU,
-//       R: updatedR,
-//       D: updatedD
-//     };
-//   };
-
-//   const rotateBackClockwise = (currentState: {
-//     [face in FaceType]: ColorType[][];
-//   }): { [face in FaceType]: ColorType[][] } => {
-//     const { L, U, R, D, B } = currentState;
-
-//     // Rotate front face counter-clockwise (equivalent to one clockwise rotation)
-//     const updatedB = rotateClockwise(B);
-
-//     const updatedL = L.map((row, index) => {
-//       if (index === 0) {
-//         return [U[0][2], row[0], row[1]];
-//       } else if (index === 1) {
-//         return [U[0][1], row[0], row[1]];
-//       } else {
-//         return [U[0][0], row[0], row[1]];
-//       }
-//     });
-
-//     const updatedU = U.map((row, index) => {
-//       if (index === 0) {
-//         return [R[0][2], R[1][2], R[2][2]];
-//       } else {
-//         return row;
-//       }
-//     });
-
-//     const updatedR = R.map((row, index) => {
-//       if (index === 0) {
-//         return [...row.slice(1), D[2][2]];
-//       } else if (index === 1) {
-//         return [...row.slice(1), D[2][1]];
-//       } else {
-//         return [...row.slice(1), D[2][0]];
-//       }
-//     }) as ColorType[][];
-
-//     const updatedD = D.map((row, index) => {
-//       if (index === 2) {
-//         return [L[0][0], L[0][1], L[0][2]];
-//       } else {
-//         return row;
-//       }
-//     }) as ColorType[][];
-
-//     return {
-//       ...currentState,
-//       L: updatedL,
-//       U: updatedU,
-//       R: updatedR,
-//       D: updatedD,
-//       B: updatedB
-//     };
-//   };
-
-//   const rotateBackCounterClockwise = (currentState: {
-//     [face in FaceType]: ColorType[][];
-//   }): { [face in FaceType]: ColorType[][] } => {
-//     const { B, L, U, R, D } = currentState;
-
-//     // Rotate front face
-//     const updatedB = rotateClockwise(B);
-
-//     const updatedL = L.map((row, index) => {
-//       if (index === 0) {
-//         return [D[2][0], row[0], row[1]];
-//       } else if (index === 1) {
-//         return [D[2][1], row[0], row[1]];
-//       } else {
-//         return [D[2][2], row[0], row[1]];
-//       }
-//     });
-
-//     const updatedU = U.map((row, index) => {
-//       if (index === 0) {
-//         return [L[2][0], L[1][0], L[0][0]];
-//       } else {
-//         return row;
-//       }
-//     });
-
-//     const updatedR = R.map((row, index) => {
-//       if (index === 0) {
-//         return [...row.slice(1), U[0][0]];
-//       } else if (index === 1) {
-//         return [...row.slice(1), U[0][1]];
-//       } else {
-//         return [...row.slice(1), U[0][2]];
-//       }
-//     }) as ColorType[][];
-
-//     const updatedD = D.map((row, index) => {
-//       if (index === 2) {
-//         return [R[2][2], R[1][2], R[0][2]];
-//       } else {
-//         return row;
-//       }
-//     });
-
-//     return {
-//       ...currentState,
-//       B: updatedB,
-//       L: updatedL,
-//       U: updatedU,
-//       R: updatedR,
-//       D: updatedD
-//     };
-//   };
-
-//   const rotateLeftClockwise = (): void => {
-//     const { F, B, L, U, D } = state;
-
-//     // Rotate left face
-//     setState(prevState => ({
-//       ...prevState,
-//       L: rotateClockwise(L)
-//     }));
-
-//     // Update adjacent faces
-//     const tempEdge = U.map(row => row[0]);
-//     U.forEach((row, index) => (row[0] = B[2 - index][2]));
-//     B.forEach((row, index) => (row[2] = D[2 - index][0]));
-//     D.forEach((row, index) => (row[0] = F[index][0]));
-//     F.forEach((row, index) => (row[0] = tempEdge[index]));
-
-//     const tempCorner = U[0][0];
-//     U[0][0] = B[2][2];
-//     B[2][2] = D[2][0];
-//     D[2][0] = F[0][0];
-//     F[0][0] = tempCorner;
-//   };
-
-//   const rotateLeftCounterClockwise = (): void => {
-//     const { F, B, L, U, D } = state;
-
-//     // Rotate left face counter-clockwise (equivalent to three clockwise rotations)
-//     setState(prevState => ({
-//       ...prevState,
-//       L: rotateClockwise(rotateClockwise(rotateClockwise(L)))
-//     }));
-
-//     // Update adjacent faces
-//     const tempEdge = U.map(row => row[0]);
-//     U.forEach((row, index) => (row[0] = F[index][0]));
-//     F.forEach((row, index) => (row[0] = D[index][0]));
-//     D.forEach((row, index) => (row[0] = B[2 - index][2]));
-//     B.forEach((row, index) => (row[2] = tempEdge[2 - index]));
-
-//     const tempCorner = U[0][0];
-//     U[0][0] = F[0][0];
-//     F[0][0] = D[0][0];
-//     D[0][0] = B[2][2];
-//     B[2][2] = tempCorner;
-//   };
-
-//   const rotateRightClockwise = (): void => {
-//     const { F, B, R, U, D } = state;
-
-//     // Rotate right face
-//     setState(prevState => ({
-//       ...prevState,
-//       R: rotateClockwise(R)
-//     }));
-
-//     // Update adjacent faces
-//     const tempEdge = U.map(row => row[2]);
-//     U.forEach((row, index) => (row[2] = F[index][2]));
-//     F.forEach((row, index) => (row[2] = D[index][2]));
-//     D.forEach((row, index) => (row[2] = B[2 - index][0]));
-//     B.forEach((row, index) => (row[0] = tempEdge[2 - index]));
-
-//     const tempCorner = U[0][2];
-//     U[0][2] = F[0][2];
-//     F[0][2] = D[0][2];
-//     D[0][2] = B[2][0];
-//     B[2][0] = tempCorner;
-//   };
-
-//   const rotateRightCounterClockwise = (): void => {
-//     const { F, B, R, U, D } = state;
-
-//     // Rotate right face counter-clockwise (equivalent to three clockwise rotations)
-//     setState(prevState => ({
-//       ...prevState,
-//       R: rotateClockwise(rotateClockwise(rotateClockwise(R)))
-//     }));
-
-//     // Update adjacent faces
-//     const tempEdge = U.map(row => row[2]);
-//     U.forEach((row, index) => (row[2] = B[2 - index][0]));
-//     B.forEach((row, index) => (row[0] = D[2 - index][2]));
-//     D.forEach((row, index) => (row[2] = F[index][2]));
-//     F.forEach((row, index) => (row[2] = tempEdge[index]));
-
-//     const tempCorner = U[0][2];
-//     U[0][2] = B[2][0];
-//     B[2][0] = D[2][2];
-//     D[2][2] = F[0][2];
-//     F[0][2] = tempCorner;
-//   };
-
-//   const rotateUpClockwise = (): void => {
-//     const { F, B, L, R, U } = state;
-
-//     // Rotate up face
-//     setState(prevState => ({
-//       ...prevState,
-//       U: rotateClockwise(U)
-//     }));
-
-//     // Update adjacent faces
-//     const tempEdge = F[0].slice();
-//     F[0] = R[0].slice();
-//     R[0] = B[0].slice();
-//     B[0] = L[0].slice();
-//     L[0] = tempEdge;
-
-//     const tempCorner = F[0][0];
-//     F[0][0] = R[0][0];
-//     R[0][0] = B[0][0];
-//     B[0][0] = L[0][0];
-//     L[0][0] = tempCorner;
-//   };
-
-//   const rotateUpCounterClockwise = (): void => {
-//     const { F, B, L, R, U } = state;
-
-//     // Rotate up face counter-clockwise (equivalent to three clockwise rotations)
-//     setState(prevState => ({
-//       ...prevState,
-//       U: rotateClockwise(rotateClockwise(rotateClockwise(U)))
-//     }));
-
-//     // Update adjacent faces
-//     const tempEdge = F[0].slice();
-//     F[0] = L[0].slice();
-//     L[0] = B[0].slice();
-//     B[0] = R[0].slice();
-//     R[0] = tempEdge;
-
-//     const tempCorner = F[0][0];
-//     F[0][0] = L[0][0];
-//     L[0][0] = B[0][0];
-//     B[0][0] = R[0][0];
-//     R[0][0] = tempCorner;
-//   };
-
-//   const rotateDownClockwise = (): void => {
-//     const { F, B, L, R, D } = state;
-
-//     // Rotate down face
-//     setState(prevState => ({
-//       ...prevState,
-//       D: rotateClockwise(D)
-//     }));
-
-//     // Update adjacent faces
-//     const tempEdge = F[2].slice();
-//     F[2] = L[2].slice();
-//     L[2] = B[2].slice();
-//     B[2] = R[2].slice();
-//     R[2] = tempEdge;
-
-//     const tempCorner = F[2][0];
-//     F[2][0] = L[2][0];
-//     L[2][0] = B[2][0];
-//     B[2][0] = R[2][0];
-//     R[2][0] = tempCorner;
-//   };
-
-//   const rotateDownCounterClockwise = (): void => {
-//     const { F, B, L, R, D } = state;
-
-//     // Rotate down face counter-clockwise (equivalent to three clockwise rotations)
-//     setState(prevState => ({
-//       ...prevState,
-//       D: rotateClockwise(rotateClockwise(rotateClockwise(D)))
-//     }));
-
-//     // Update adjacent faces
-//     const tempEdge = F[2].slice();
-//     F[2] = R[2].slice();
-//     R[2] = B[2].slice();
-//     B[2] = L[2].slice();
-//     L[2] = tempEdge;
-
-//     const tempCorner = F[2][0];
-//     F[2][0] = R[2][0];
-//     R[2][0] = B[2][0];
-//     B[2][0] = L[2][0];
-//     L[2][0] = tempCorner;
-//   };
-
-//   const rotateClockwise = (arr: ColorType[][]): ColorType[][] => {
-//     const rotated: ColorType[][] = [];
-//     const size = arr.length;
-
-//     for (let i = 0; i < size; i++) {
-//       rotated.push([]);
-//       for (let j = 0; j < size; j++) {
-//         rotated[i][j] = arr[size - j - 1][i];
-//       }
-//     }
-//     return rotated;
-//   };
-
-//   const getRandomInt = (min: number, max: number) => {
-//     return Math.floor(Math.random() * (max - min + 1)) + min;
-//   };
-
-//   const generateScramble = () => {
-//     let scramble = [];
-//     let previousMove = '';
-
-//     for (let i = 0; i < 20; i++) {
-//       let move = MOVES[getRandomInt(0, MOVES.length - 1)];
-//       let notation = getRandomInt(0, 2);
-//       if (notation === 1) {
-//         move += "'";
-//       } else if (notation === 2) {
-//         move += '2';
-//       }
-
-//       while (move.charAt(0) === previousMove.charAt(0)) {
-//         move = MOVES[getRandomInt(0, MOVES.length - 1)];
-//         notation = getRandomInt(0, 2);
-//         if (notation === 1) {
-//           move += "'";
-//         } else if (notation === 2) {
-//           move += '2';
-//         }
-//       }
-
-//       scramble.push(move);
-//       previousMove = move;
-//     }
-
-//     return scramble.join(' ');
-//   };
-
-//   const createScramble = () => {
-//     setState(initialCubeState);
-//     setTimeout(() => {
-//       const scramble = generateScramble();
-//       move('F');
-//       setScrambleState(scramble);
-//     }, 1000);
-//   };
-
-//   const resetCube = (): void => {
-//     setState(initialCubeState);
-//   };
-
-//   useEffect(() => {
-//     resetCube();
-//   }, []);
-
-//   return { state, createScramble, resetCube, scrambleState, initialCubeState };
-// };
-
-// export default useCubeLogicHooks;
-
 import { useEffect, useState } from 'react';
 import { ColorType } from '../types/ColorType';
 import { FaceType } from '../types/FaceType';
@@ -811,6 +88,46 @@ const useCubeLogicHooks = () => {
         const resultBL = rotateBackCounterClockwise(state);
         setState(resultBL);
         break;
+      case 'B2':
+        const resultB180 = rotateBackClockwise180(state);
+        setState(resultB180);
+        break;
+      case 'R':
+        const resultR = rotateRightClockwise(state);
+        setState(resultR);
+        break;
+      case "R'":
+        const resultRCounter = rotateRightCounterClockwise(state);
+        setState(resultRCounter);
+        break;
+      case 'R2':
+        const resultR180 = rotateRightClockwise180(state);
+        setState(resultR180);
+        break;
+      case 'L':
+        const resultL = rotateLeftClockwise(state);
+        setState(resultL);
+        break;
+      case "L'":
+        const resultLCounter = rotateLeftCounterClockwise(state);
+        setState(resultLCounter);
+        break;
+      case 'L2':
+        const resultL180 = rotateLeftClockwise180(state);
+        setState(resultL180);
+        break;
+      case 'D':
+        const resultD = rotateDownClockwise(state);
+        setState(resultD);
+        break;
+      case "D'":
+        const resultDCounter = rotateDownCounterClockwise(state);
+        setState(resultDCounter);
+        break;
+      case 'D2':
+        const resultD180 = rotateDownClockwise180(state);
+        setState(resultD180);
+        break;
       default:
         throw new Error(`Invalid move: ${move}`);
     }
@@ -822,7 +139,17 @@ const useCubeLogicHooks = () => {
   const rotateFrontClockwise = (currentState: {
     [face in FaceType]: ColorType[][];
   }): { [face in FaceType]: ColorType[][] } => {
-    const { L, U, R, D } = currentState;
+    const { L, U, R, D, F } = currentState;
+
+    const updateF = F.map((row, index) => {
+      if (index === 0) {
+        return [F[2][0], F[1][0], F[0][0]];
+      } else if (index === 1) {
+        return [F[2][1], F[1][1], F[0][1]];
+      } else {
+        return [F[2][2], F[1][2], F[0][2]];
+      }
+    });
 
     const updatedL = L.map((row, index) => {
       if (index === 0) {
@@ -836,14 +163,11 @@ const useCubeLogicHooks = () => {
 
     const updatedU = U.map((row, index) => {
       if (index === 2) {
-        console.log('L FACE ', L);
-        console.log('Change in ', row);
         return [L[0][2], L[1][2], L[1][2]];
       } else {
         return row;
       }
     });
-    console.log('U FACE => ', updatedU);
 
     const updatedR = R.map((row, index) => [U[2][index], ...row.slice(1)]);
 
@@ -857,6 +181,7 @@ const useCubeLogicHooks = () => {
 
     return {
       ...currentState,
+      F: updateF,
       L: updatedL,
       U: updatedU,
       R: updatedR,
@@ -867,7 +192,17 @@ const useCubeLogicHooks = () => {
   const rotateFrontCounterClockwise = (currentState: {
     [face in FaceType]: ColorType[][];
   }): { [face in FaceType]: ColorType[][] } => {
-    const { L, U, R, D } = currentState;
+    const { L, U, R, D, F } = currentState;
+
+    const updateF = F.map((row, index) => {
+      if (index === 0) {
+        return [F[0][2], F[1][2], F[0][2]];
+      } else if (index === 1) {
+        return [F[0][1], F[1][1], F[2][1]];
+      } else {
+        return [F[0][0], F[1][0], F[2][0]];
+      }
+    });
 
     const updatedL = L.map((row, index) => {
       if (index === 0) {
@@ -907,6 +242,7 @@ const useCubeLogicHooks = () => {
 
     return {
       ...currentState,
+      F: updateF,
       L: updatedL,
       U: updatedU,
       R: updatedR,
@@ -917,9 +253,29 @@ const useCubeLogicHooks = () => {
   const rotateFront180 = (currentState: {
     [face in FaceType]: ColorType[][];
   }): { [face in FaceType]: ColorType[][] } => {
-    const { L, U, R, D } = currentState;
+    const { L, U, R, D, F } = currentState;
 
     //     // Rotate front face
+
+    const updateF = F.map((row, index) => {
+      if (index === 0) {
+        return [F[2][0], F[1][0], F[0][0]];
+      } else if (index === 1) {
+        return [F[2][1], F[1][1], F[0][1]];
+      } else {
+        return [F[2][2], F[1][2], F[0][2]];
+      }
+    });
+
+    const updateF180 = updateF.map((row, index) => {
+      if (index === 0) {
+        return [updateF[2][0], F[1][0], F[0][0]];
+      } else if (index === 1) {
+        return [updateF[2][1], F[1][1], F[0][1]];
+      } else {
+        return [updateF[2][2], F[1][2], F[0][2]];
+      }
+    });
 
     const updatedL = L.map((row, index) => {
       if (index === 0) {
@@ -951,6 +307,7 @@ const useCubeLogicHooks = () => {
 
     return {
       ...currentState,
+      F: updateF180,
       L: updatedL,
       U: updatedU,
       R: updatedR,
@@ -964,6 +321,16 @@ const useCubeLogicHooks = () => {
     const { L, U, R, D, B } = currentState;
 
     // Rotate front face counter-clockwise (equivalent to one clockwise rotation)
+
+    const updateB = B.map((row, index) => {
+      if (index === 0) {
+        return [B[2][0], B[1][0], B[0][0]];
+      } else if (index === 1) {
+        return [B[2][1], B[1][1], B[0][1]];
+      } else {
+        return [B[2][2], B[1][2], B[0][2]];
+      }
+    });
 
     const updatedL = L.map((row, index) => {
       if (index === 0) {
@@ -995,7 +362,7 @@ const useCubeLogicHooks = () => {
 
     const updatedD = D.map((row, index) => {
       if (index === 2) {
-        return [L[0][0], L[1][0], L[1][0]];
+        return [L[0][0], L[1][0], L[2][0]];
       } else {
         return row;
       }
@@ -1007,7 +374,7 @@ const useCubeLogicHooks = () => {
       U: updatedU,
       R: updatedR,
       D: updatedD,
-      B: B
+      B: updateB
     };
   };
 
@@ -1016,7 +383,15 @@ const useCubeLogicHooks = () => {
   }): { [face in FaceType]: ColorType[][] } => {
     const { B, L, U, R, D } = currentState;
 
-    // Rotate front face
+    const updateB = B.map((row, index) => {
+      if (index === 0) {
+        return [B[0][2], B[1][2], B[2][2]];
+      } else if (index === 1) {
+        return [B[0][1], B[1][1], B[2][1]];
+      } else {
+        return [B[0][0], B[1][0], B[2][0]];
+      }
+    });
 
     const updatedL = L.map((row, index) => {
       if (index === 0) {
@@ -1056,12 +431,434 @@ const useCubeLogicHooks = () => {
 
     return {
       ...currentState,
-      B: B,
+      B: updateB,
       L: updatedL,
       U: updatedU,
       R: updatedR,
       D: updatedD
     };
+  };
+
+  const rotateBackClockwise180 = (currentState: {
+    [face in FaceType]: ColorType[][];
+  }): { [face in FaceType]: ColorType[][] } => {
+    // Rotate the first time
+    const firstRotation = rotateBackClockwise(currentState);
+
+    // Rotate the result of the first rotation again
+    const secondRotation = rotateBackClockwise(firstRotation);
+
+    return secondRotation;
+  };
+
+  const rotateRightClockwise = (currentState: {
+    [face in FaceType]: ColorType[][];
+  }): { [face in FaceType]: ColorType[][] } => {
+    const { F, R, B, U, D } = currentState;
+
+    const UpdateR = R.map((row, index) => {
+      if (index === 0) {
+        return [R[2][0], R[1][0], R[0][0]];
+      } else if (index === 1) {
+        return [R[2][1], R[1][1], R[0][1]];
+      } else {
+        return [R[2][2], R[1][2], R[0][2]];
+      }
+    });
+
+    const updatedU = U.map((row, index) => {
+      if (index === 0) {
+        return [row[0], row[1], F[0][2]];
+      } else if (index === 1) {
+        return [row[0], row[1], F[1][2]];
+      } else {
+        return [row[0], row[1], F[2][2]];
+      }
+    });
+
+    const updatedF = F.map((row, index) => {
+      if (index === 0) {
+        return [row[0], row[1], D[0][2]];
+      } else if (index === 1) {
+        return [row[0], row[1], D[1][2]];
+      } else {
+        return [row[0], row[1], D[2][2]];
+      }
+    });
+
+    const updatedD = D.map((row, index) => {
+      if (index === 0) {
+        return [row[0], row[1], B[2][0]];
+      } else if (index === 1) {
+        return [row[0], row[1], B[1][0]];
+      } else {
+        return [row[0], row[1], B[0][0]];
+      }
+    });
+
+    const updatedB = B.map((row, index) => {
+      if (index === 0) {
+        return [U[2][2], row[1], row[2]];
+      } else if (index === 1) {
+        return [U[1][2], row[1], row[2]];
+      } else {
+        return [U[0][2], row[1], row[2]];
+      }
+    });
+
+    return {
+      ...currentState,
+      R: UpdateR,
+      U: updatedU,
+      F: updatedF,
+      D: updatedD,
+      B: updatedB
+    };
+  };
+
+  const rotateRightCounterClockwise = (currentState: {
+    [face in FaceType]: ColorType[][];
+  }): { [face in FaceType]: ColorType[][] } => {
+    const { F, R, B, U, D } = currentState;
+
+    const UpdateR = R.map((row, index) => {
+      if (index === 0) {
+        return [R[0][2], R[1][2], R[2][2]];
+      } else if (index === 1) {
+        return [R[0][1], R[1][1], R[2][1]];
+      } else {
+        return [R[0][0], R[1][0], R[2][0]];
+      }
+    });
+
+    const updatedU = U.map((row, index) => {
+      if (index === 0) {
+        return [row[0], row[1], B[2][0]];
+      } else if (index === 1) {
+        return [row[0], row[1], B[1][0]];
+      } else {
+        return [row[0], row[1], B[0][0]];
+      }
+    });
+
+    const updatedF = F.map((row, index) => {
+      if (index === 0) {
+        return [row[0], row[1], U[0][2]];
+      } else if (index === 1) {
+        return [row[0], row[1], U[1][2]];
+      } else {
+        return [row[0], row[1], U[2][2]];
+      }
+    });
+
+    const updatedD = D.map((row, index) => {
+      if (index === 0) {
+        return [row[0], row[1], F[0][2]];
+      } else if (index === 1) {
+        return [row[0], row[1], F[1][2]];
+      } else {
+        return [row[0], row[1], F[2][2]];
+      }
+    });
+
+    const updatedB = B.map((row, index) => {
+      if (index === 0) {
+        return [D[2][2], row[1], row[2]];
+      } else if (index === 1) {
+        return [D[1][2], row[1], row[2]];
+      } else {
+        return [D[0][2], row[1], row[2]];
+      }
+    });
+
+    return {
+      ...currentState,
+      R: UpdateR,
+      U: updatedU,
+      F: updatedF,
+      D: updatedD,
+      B: updatedB
+    };
+  };
+
+  const rotateRightClockwise180 = (currentState: {
+    [face in FaceType]: ColorType[][];
+  }): { [face in FaceType]: ColorType[][] } => {
+    // Rotate the first time
+    const firstRotation = rotateRightClockwise(currentState);
+
+    // Rotate the result of the first rotation again
+    const secondRotation = rotateRightClockwise(firstRotation);
+
+    return secondRotation;
+  };
+
+  const rotateLeftClockwise = (currentState: {
+    [face in FaceType]: ColorType[][];
+  }): { [face in FaceType]: ColorType[][] } => {
+    const { F, L, B, U, D } = currentState;
+
+    const updatedL = L.map((row, index) => {
+      if (index === 0) {
+        return [L[2][0], L[1][0], L[0][0]];
+      } else if (index === 1) {
+        return [L[2][1], L[1][1], L[0][1]];
+      } else {
+        return [L[2][2], L[1][2], L[0][2]];
+      }
+    });
+
+    const updatedU = U.map((row, index) => {
+      if (index === 0) {
+        return [B[2][2], row[1], row[2]];
+      } else if (index === 1) {
+        return [B[1][2], row[1], row[2]];
+      } else {
+        return [B[0][2], row[1], row[2]];
+      }
+    });
+
+    const updatedF = F.map((row, index) => {
+      if (index === 0) {
+        return [U[index][0], row[1], row[2]];
+      } else if (index === 1) {
+        return [U[index][0], row[1], row[2]];
+      } else {
+        return [U[index][0], row[1], row[2]];
+      }
+    });
+
+    const updatedD = D.map((row, index) => {
+      if (index === 0) {
+        return [F[0][0], row[1], row[2]];
+      } else if (index === 1) {
+        return [F[1][0], row[1], row[2]];
+      } else {
+        return [F[2][0], row[1], row[2]];
+      }
+    });
+
+    const updatedB = B.map((row, index) => {
+      if (index === 0) {
+        return [row[0], row[1], D[2][0]];
+      } else if (index === 1) {
+        return [row[0], row[1], D[1][0]];
+      } else {
+        return [row[0], row[1], D[0][0]];
+      }
+    });
+
+    return {
+      ...currentState,
+      L: updatedL,
+      U: updatedU,
+      F: updatedF,
+      D: updatedD,
+      B: updatedB
+    };
+  };
+
+  const rotateLeftCounterClockwise = (currentState: {
+    [face in FaceType]: ColorType[][];
+  }): { [face in FaceType]: ColorType[][] } => {
+    const { F, L, B, U, D } = currentState;
+
+    const updatedL = L.map((row, index) => {
+      if (index === 0) {
+        return [L[0][2], L[1][2], L[2][2]];
+      } else if (index === 1) {
+        return [L[0][1], L[1][1], L[2][1]];
+      } else {
+        return [L[0][0], L[1][0], L[2][0]];
+      }
+    });
+
+    const updatedU = U.map((row, index) => {
+      if (index === 0) {
+        return [F[index][0], row[1], row[2]];
+      } else if (index === 1) {
+        return [F[index][0], row[1], row[2]];
+      } else {
+        return [F[index][0], row[1], row[2]];
+      }
+    });
+
+    const updatedF = F.map((row, index) => {
+      if (index === 0) {
+        return [D[index][0], row[1], row[2]];
+      } else if (index === 1) {
+        return [D[index][0], row[1], row[2]];
+      } else {
+        return [D[index][0], row[1], row[2]];
+      }
+    });
+
+    const updatedD = D.map((row, index) => {
+      if (index === 0) {
+        return [B[2][2], row[1], row[2]];
+      } else if (index === 1) {
+        return [B[1][2], row[1], row[2]];
+      } else {
+        return [B[0][2], row[1], row[2]];
+      }
+    });
+
+    const updatedB = B.map((row, index) => {
+      if (index === 0) {
+        return [row[0], row[1], U[2][0]];
+      } else if (index === 1) {
+        return [row[0], row[1], U[1][0]];
+      } else {
+        return [row[0], row[1], U[0][0]];
+      }
+    });
+
+    return {
+      ...currentState,
+      L: updatedL,
+      U: updatedU,
+      F: updatedF,
+      D: updatedD,
+      B: updatedB
+    };
+  };
+
+  const rotateLeftClockwise180 = (currentState: {
+    [face in FaceType]: ColorType[][];
+  }): { [face in FaceType]: ColorType[][] } => {
+    // Rotate the first time
+    const firstRotation = rotateLeftClockwise(currentState);
+
+    // Rotate the result of the first rotation again
+    const secondRotation = rotateLeftClockwise(firstRotation);
+
+    return secondRotation;
+  };
+
+  const rotateDownClockwise = (currentState: {
+    [face in FaceType]: ColorType[][];
+  }): { [face in FaceType]: ColorType[][] } => {
+    const { F, R, B, L, D } = currentState;
+
+    const updatedD = D.map((row, index) => {
+      if (index === 0) {
+        return [D[2][0], D[1][0], D[0][0]];
+      } else if (index === 1) {
+        return [D[2][1], D[1][1], D[0][1]];
+      } else {
+        return [D[2][2], D[1][2], D[0][2]];
+      }
+    });
+
+    const updatedF = F.map((row, index) => {
+      if (index === 2) {
+        return [L[2][0], L[2][1], L[2][2]];
+      } else {
+        return row;
+      }
+    });
+
+    const updatedR = R.map((row, index) => {
+      if (index === 2) {
+        return [F[2][0], F[2][1], F[2][2]];
+      } else {
+        return row;
+      }
+    });
+
+    const updatedL = L.map((row, index) => {
+      if (index === 2) {
+        return [B[2][0], B[2][1], B[2][2]];
+      } else {
+        return row;
+      }
+    });
+
+    const updatedB = B.map((row, index) => {
+      if (index === 2) {
+        return [R[2][0], R[2][1], R[2][2]];
+      } else {
+        return row;
+      }
+    });
+
+    return {
+      ...currentState,
+      D: updatedD,
+      R: updatedR,
+      F: updatedF,
+      L: updatedL,
+      B: updatedB
+    };
+  };
+
+  const rotateDownCounterClockwise = (currentState: {
+    [face in FaceType]: ColorType[][];
+  }): { [face in FaceType]: ColorType[][] } => {
+    const { F, R, B, L, D } = currentState;
+
+    const updatedD = D.map((row, index) => {
+      if (index === 0) {
+        return [D[0][2], D[1][2], D[2][2]];
+      } else if (index === 1) {
+        return [D[0][1], D[1][1], D[2][1]];
+      } else {
+        return [D[0][0], D[1][0], D[2][0]];
+      }
+    });
+
+    const updatedF = F.map((row, index) => {
+      if (index === 2) {
+        return [R[2][0], R[2][1], R[2][2]];
+      } else {
+        return row;
+      }
+    });
+
+    const updatedR = R.map((row, index) => {
+      if (index === 2) {
+        return [B[2][0], B[2][1], B[2][2]];
+      } else {
+        return row;
+      }
+    });
+
+    const updatedL = L.map((row, index) => {
+      if (index === 2) {
+        return [F[2][0], F[2][1], F[2][2]];
+      } else {
+        return row;
+      }
+    });
+
+    const updatedB = B.map((row, index) => {
+      if (index === 2) {
+        return [L[2][0], L[2][1], L[2][2]];
+      } else {
+        return row;
+      }
+    });
+
+    return {
+      ...currentState,
+      D: updatedD,
+      R: updatedR,
+      F: updatedF,
+      L: updatedL,
+      B: updatedB
+    };
+  };
+
+  const rotateDownClockwise180 = (currentState: {
+    [face in FaceType]: ColorType[][];
+  }): { [face in FaceType]: ColorType[][] } => {
+    // Rotate the first time
+    const firstRotation = rotateDownClockwise(currentState);
+
+    // Rotate the result of the first rotation again
+    const secondRotation = rotateDownClockwise(firstRotation);
+
+    return secondRotation;
   };
 
   const getRandomInt = (min: number, max: number) => {
@@ -1108,8 +905,8 @@ const useCubeLogicHooks = () => {
   const createScramble = () => {
     setState(initialCubeState);
     setTimeout(() => {
-      const scramble = "F2 B F' B' F";
-      // const scramble = generateScramble();
+      // const scramble = ""F2 B F' B' F L' R D B L";
+      const scramble = generateScramble();
       setScrambleState(scramble);
     }, 1000);
   };
