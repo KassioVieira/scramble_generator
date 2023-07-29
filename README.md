@@ -6,7 +6,7 @@ The Scramble App is a web application that generates random scrambles for Rubik'
 
 This app now offers improved support for mobile devices, ensuring a seamless experience for users accessing the application on their smartphones and tablets. With the latest updates, the app is optimized to work efficiently on screens of varying sizes.
 
-<img src="docs/mobile.jpeg">
+<img src="docs/mobile.jpeg" style="width: 40%">
 
 <blockquote style="
   border-left: 4px solid #f44336;
