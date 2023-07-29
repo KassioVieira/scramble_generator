@@ -4,10 +4,19 @@ import Timer from '../components/Timer/Timer';
 import useTimerHooks from '../hooks/useTimerHooks';
 import LeftPanel from '../components/LeftPanel/LeftPanel';
 import CubeFace from '../components/CubeFace/CubeFace';
+import ModalTimer from '../components/Timer/ModalTimer';
 
 const Home = () => {
-  const { time, formatTime, savedTimes, scrambleState, state } =
-    useTimerHooks();
+  const {
+    time,
+    formatTime,
+    savedTimes,
+    scrambleState,
+    state,
+    startInMobileDevices,
+    isModalOpen,
+    lastDisplayedTime
+  } = useTimerHooks();
 
   return (
     <div className='container'>
@@ -16,8 +25,11 @@ const Home = () => {
         <section className='centered-section'>
           <Scramble value={scrambleState} />
         </section>
-        <section className='centered-section'>
-          <Timer value={formatTime(time)} />
+        <section
+          className='timer-section'
+          onClick={() => startInMobileDevices()}
+        >
+          <Timer value={formatTime(lastDisplayedTime)} />
         </section>
         <section className='cube-section'>
           <div className='rubiks-cube'>
@@ -36,6 +48,13 @@ const Home = () => {
           </div>
         </section>
       </div>
+      <ModalTimer
+        isOpen={isModalOpen}
+        onClose={() => {}}
+        resetTime={() => startInMobileDevices()}
+      >
+        <Timer value={formatTime(time)} />
+      </ModalTimer>
     </div>
   );
 };

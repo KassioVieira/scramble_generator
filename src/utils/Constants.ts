@@ -1,5 +1,4 @@
-// export const MOVES = ['U', 'D', 'R', 'L', 'F', 'B'];
-export const MOVES = ['D', 'R', 'L', 'F', 'B'];
+export const MOVES = ['U', 'D', 'R', 'L', 'F', 'B'];
 export const COLORS = {
   green: '#19E02A',
   blue: '#0183E8',

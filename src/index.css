@@ -26,14 +26,10 @@ code {
   align-items: center;
   justify-content: center;
   width: 85%;
-  /* height: 100vh; */
 }
 
 .scrambleBox {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .scramble {
@@ -44,6 +40,12 @@ code {
 .centered-section {
   text-align: center;
   flex: 2;
+}
+
+.timer-section {
+  text-align: center;
+  flex: 2;
+  max-height: 200px;
 }
 
 .time {
@@ -164,4 +166,71 @@ li {
   bottom: 10px;
   top: 0px;
   margin-bottom: 25px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.99);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  padding: 20px;
+  border-radius: 8px;
+  color: green;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .left-sidebar {
+    display: none;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .timer-section {
+    text-align: center;
+    flex: 2;
+    height: 300px;
+  }
+
+  .cube-section {
+    width: 45%;
+    height: auto;
+    margin-top: 20px;
+  }
+
+  .cube-cell {
+    width: 15px;
+    height: 15px;
+    margin: 2px;
+  }
 }

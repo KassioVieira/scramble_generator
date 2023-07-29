@@ -12,20 +12,25 @@ export default () => {
   const { state, createScramble, scrambleState, initialCubeState } =
     useCubeLogicHooks();
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
     let interval: any = null;
 
     const handleKeyDown = (event: KeyboardEvent) => {
+      setIsModalOpen(!isModalOpen);
       if (event.key === ' ' || event.key === 'Space') {
         if (running) {
           setRunning(false);
-          const formattedTime = formatTime(lastDisplayedTime); // Format the last displayed time
+          const formattedTime = formatTime(time); // Format the last displayed time
+          setLastDisplayedTime(time); // Update the last displayed time
           setSavedTimes(prevTimes => [...prevTimes, formattedTime]); // Save the formatted time to the list
           localStorage.setItem(
             'timerValues',
             JSON.stringify([...savedTimes, formattedTime])
           ); // Store in localStorage
           createScramble();
+          setTime(0);
         } else {
           setRunning(true);
         }
@@ -36,7 +41,6 @@ export default () => {
       interval = setInterval(() => {
         setTime(prevTime => {
           const updatedTime = prevTime + 1;
-          setLastDisplayedTime(updatedTime); // Update the last displayed time
           return updatedTime;
         });
       }, 10);
@@ -50,7 +54,7 @@ export default () => {
       clearInterval(interval);
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [running, lastDisplayedTime]);
+  }, [running, time]);
 
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 6000);
@@ -67,7 +71,7 @@ export default () => {
       .toString()
       .padStart(2, '0')}`;
 
-    return timeString;
+    return timeString.replace(',', '.');
   };
 
   useEffect(() => {
@@ -83,11 +87,17 @@ export default () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (running) {
-      setLastDisplayedTime(time); // Update the last displayed time
-    }
-  }, [time, running]);
+  const startInMobileDevices = () => {
+    const spaceKeyDownEvent = new KeyboardEvent('keydown', {
+      key: ' ',
+      code: 'Space',
+      which: 32,
+      keyCode: 32,
+      bubbles: true
+    });
+
+    document.dispatchEvent(spaceKeyDownEvent);
+  };
 
   return {
     running,
@@ -95,6 +105,9 @@ export default () => {
     time,
     savedTimes,
     scrambleState,
-    state
+    state,
+    startInMobileDevices,
+    isModalOpen,
+    lastDisplayedTime
   };
 };
