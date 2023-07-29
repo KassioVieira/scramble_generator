@@ -2,7 +2,11 @@
 
 The Scramble App is a web application that generates random scrambles for Rubik's Cube. It provides a simple and convenient way for speedcubers and puzzle enthusiasts to practice solving the Rubik's Cube.
 
-![App Screenshot](docs/img.png)
+![App Screenshot](docs/img1.png)
+
+This app now offers improved support for mobile devices, ensuring a seamless experience for users accessing the application on their smartphones and tablets. With the latest updates, the app is optimized to work efficiently on screens of varying sizes.
+
+<img src="docs/mobile.jpeg">
 
 <blockquote style="
   border-left: 4px solid #f44336;
