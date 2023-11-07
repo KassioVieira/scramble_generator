@@ -14,9 +14,15 @@ code {
     monospace;
 }
 
+p,
+span {
+  color: #ddd5c8;
+}
+
 .container {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: flex-start;
 }
 
@@ -35,6 +41,7 @@ code {
 .scramble {
   color: white;
   font-size: 30px;
+  text-align: center;
 }
 
 .centered-section {
@@ -195,6 +202,93 @@ li {
   background: none;
   border: none;
   cursor: pointer;
+}
+
+.logo-component {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.center-invert {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.center-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-box {
+  height: 50px;
+  border-radius: 20px;
+  padding-left: 5px;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.button-reverse {
+  background-color: #3498db;
+  margin-top: 20px;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 50%;
+  align-self: center;
+}
+
+.button-reverse:hover {
+  background-color: #2980b9;
+}
+
+.reverted-scramble {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 22px;
+  color: #ff5733;
+  font-weight: bold;
+  padding: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.row-square {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.square {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  background-color: #3498db;
+  margin: 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+  color: #fff;
+}
+
+.titleSite {
+  font-family: 'Arial', sans-serif;
+  font-size: 36px;
+  color: #ddd5c8;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 @media screen and (max-width: 600px) {
