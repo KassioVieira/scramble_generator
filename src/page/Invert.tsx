@@ -21,7 +21,7 @@ const Invert = () => {
           onChange={handleChange}
         ></input>
         <button className='button-reverse' onClick={invertScramble}>
-          reverse
+          Inverter
         </button>
 
         {invertedScramble && (
