@@ -12,9 +12,7 @@ const Invert = () => {
         <div className='center-icon'>
           <RubiksCubeIcon />
         </div>
-        <h1 className='scramble'>
-          Insira aqui o algorítimo para ser invertido
-        </h1>
+        <h1 className='scramble'>Insira aqui o algoritmo para ser invertido</h1>
         <input
           type='text'
           className='input-box'

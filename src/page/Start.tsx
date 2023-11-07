@@ -20,7 +20,7 @@ const Start = () => {
           </div>
           <div className='square' onClick={() => navigate('/invert')}>
             <div className='content'>
-              <p style={{ fontSize: 22 }}>Invert algorithm</p>
+              <p style={{ fontSize: 22 }}>Inverter Algoritmo</p>
             </div>
           </div>
         </div>

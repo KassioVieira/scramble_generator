@@ -8,7 +8,7 @@ export default function useInvertedHooks() {
   const invertScramble = () => {
     if (!isCuboAlgorithmValid(value)) {
       setNotValid(true);
-      setInvertedScramble('Este algorítimo não é válido');
+      setInvertedScramble('Este algoritmo não é válido');
       setValue('');
       return;
     }
@@ -18,7 +18,7 @@ export default function useInvertedHooks() {
     const originalReverse = moves.reverse();
 
     const reverseMovements = originalReverse.map(move => {
-      if (move.endsWith("'")) {
+      if (move.endsWith("'") || move.endsWith('’')) {
         return move.slice(0, -1);
       } else if (move.endsWith('2')) {
         return move;
@@ -33,7 +33,7 @@ export default function useInvertedHooks() {
   };
 
   function isCuboAlgorithmValid(value: string) {
-    const regex = /^[RLUDFBrludfbxzy'2\s]+$/;
+    const regex = /^[RLUDFBrludfbxzy'’‘2\s]+$/;
 
     return regex.test(value);
   }
